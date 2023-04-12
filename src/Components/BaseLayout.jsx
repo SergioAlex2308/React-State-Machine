@@ -6,14 +6,13 @@ import { StepLayout } from './StepLayout'
 import WorkOutMachine from '../Machines/WorkOutMachine'
 import { Welcome } from './Welcome'
 import { Search } from './Search'
+import { Series } from './Series'
+import { Summary } from './Summary'
 
 function BaseLayout () {
   const [state, send] = useMachine(WorkOutMachine)
 
-  console.log('Nuestra maquina: ', state)
-  console.log('Matches', state.matches('initial'))
-  console.log('Matches', state.matches('series'))
-  console.log('Can', state.can('FINISH'))
+  console.log('Nuestra maquina: ', state.value)
 
   return (
     <main className='main'>
@@ -23,6 +22,8 @@ function BaseLayout () {
         send={send}
         onWelcome={send => <Welcome send={send} />}
         onSearch={send => <Search send={send} />}
+        onSeries={send => <Series send={send} />}
+        onSummary={send => <Summary send={send} />}
       />
     </main>
   )

@@ -2,6 +2,7 @@ import { createMachine } from "xstate";
 
 const workOutMachine = createMachine({
 	id: "Let f*cking go!",
+	predictableActionArguments: true,
 	initial: "initial",
 	states: {
 		initial: {
@@ -11,20 +12,14 @@ const workOutMachine = createMachine({
 		},
 		add: {
 			on: {
-				CONTINUE: "repetition",
+				CONTINUE: "reps",
 				CANCEL: "initial",
 			},
 		},
-		repetition: {
-			on: {
-				CONTINUE: "series",
-				CANCEL: "add",
-			},
-		},
-		series: {
+		reps: {
 			on: {
 				CONTINUE: "exercise",
-				CANCEL: "repetition",
+				CANCEL: "add",
 			},
 		},
 		exercise: {

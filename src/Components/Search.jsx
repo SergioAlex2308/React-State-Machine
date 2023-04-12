@@ -5,6 +5,9 @@ function Search ({ send }) {
   const handleSelect = e => {
     setExercise(e.target.value)
   }
+  const goToSeries = () => {
+	send('CONTINUE')
+  }
 
   const options = ['Pullover', 'Push up', 'Pull up', 'Bench press']
   return (
@@ -20,7 +23,7 @@ function Search ({ send }) {
           </option>
         ))}
       </select>
-      <button disabled={exercise === ''}>Continue</button>
+      <button disabled={exercise === ''} onClick={goToSeries}>Continue</button>
     </div>
   )
 }

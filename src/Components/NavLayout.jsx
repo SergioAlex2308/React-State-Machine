@@ -6,7 +6,7 @@ function NavLayout ({ state, send }) {
   }
   return (
     <nav className='nav'>
-      <h1>Work out!!</h1>
+      <h1>Let's work out!! 💪</h1>
       {!state.matches('initial') && !state.matches('exercise') && (
         <button onClick={onCancel}>Back</button>
       )}

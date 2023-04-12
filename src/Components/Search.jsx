@@ -6,24 +6,28 @@ function Search ({ send }) {
     setExercise(e.target.value)
   }
   const goToSeries = () => {
-	send('CONTINUE')
+    send('CONTINUE')
   }
 
-  const options = ['Pullover', 'Push up', 'Pull up', 'Bench press']
+  const options = ['Abs', 'Leg', 'Arms', 'Chest', 'Back']
   return (
     <div>
-      <h1>Find a exercise</h1>
-      <select id='exercise' value={exercise} onChange={handleSelect}>
-        <option value='' disabled defaultValue>
-          Escoge un país
-        </option>
-        {options.map(op => (
-          <option key={op} value={op}>
-            {op}
+      <h2>Select a muscle group</h2>
+      <div className='block-evenly'>
+        <select id='exercise' value={exercise} onChange={handleSelect}>
+          <option value='' disabled defaultValue>
+            Muscle group
           </option>
-        ))}
-      </select>
-      <button disabled={exercise === ''} onClick={goToSeries}>Continue</button>
+          {options.map(op => (
+            <option key={op} value={op}>
+              {op}
+            </option>
+          ))}
+        </select>
+        <button disabled={exercise === ''} onClick={goToSeries}>
+          Continue
+        </button>
+      </div>
     </div>
   )
 }

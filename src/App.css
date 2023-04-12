@@ -7,9 +7,21 @@
   padding: 2rem;
   text-align: center;
 }
+
+.block-evenly {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.margin-y {
+  margin: 20px 0;
+}
+
 .App {
   width: 60%;
 }
+
 .main {
   background-color: black;
   padding: 20px;
@@ -20,4 +32,30 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.container-counter, .container-counter p {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-weight: 500;
+}
+
+.counter-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter-button button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 20px;
+  margin: 0 10px;
+}
+
+.list-exercise {
+  margin: 0 auto;
 }

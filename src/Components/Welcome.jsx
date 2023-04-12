@@ -6,8 +6,8 @@ function Welcome ({send}) {
   }
   return (
     <div>
-      <h1>Let's start!</h1>
-      <p>Select your exercise and get ready!</p>
+      <h2>Let's start!</h2>
+      <p>Select yours exercises and get ready!</p>
       <button onClick={startWorkOut}>Start</button>
     </div>
   )

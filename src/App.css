@@ -1,0 +1,23 @@
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+.App {
+  width: 60%;
+}
+.main {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

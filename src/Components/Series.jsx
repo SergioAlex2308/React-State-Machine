@@ -1,24 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Series ({ send }) {
-  const [repCounter, setRepCounter] = React.useState(0)
+  const defaultExercise = {
+    nameExercise: '',
+    repCounter: 0,
+    seriesCounter: 0
+  }
+  const [listExercise, setListExercise] = useState([])
+  const [exerciseUser, setExerciseUser] = useState(defaultExercise)
+
+  //const [repCounter, setRepCounter] = React.useState(0)
   const repIncrease = () => {
-    setRepCounter(repCounter + 1)
+    setExerciseUser({
+      ...exerciseUser,
+      repCounter: exerciseUser.repCounter + 1
+    })
   }
   const repDecrease = () => {
-    setRepCounter(repCounter - 1)
+    setExerciseUser({
+      ...exerciseUser,
+      repCounter: exerciseUser.repCounter - 1
+    })
   }
 
-  const [seriesCounter, setseriesCounter] = React.useState(0)
+  //const [seriesCounter, setseriesCounter] = React.useState(0)
   const seriesIncrease = () => {
-    setseriesCounter(repCounter + 1)
+    setExerciseUser({
+      ...exerciseUser,
+      seriesCounter: exerciseUser.seriesCounter + 1
+    })
   }
   const seriesDecrease = () => {
-    setseriesCounter(repCounter - 1)
+    setExerciseUser({
+      ...exerciseUser,
+      seriesCounter: exerciseUser.seriesCounter - 1
+    })
   }
 
+  const handleName = e => {
+    setExerciseUser({
+      ...exerciseUser,
+      nameExercise: e.target.value
+    })
+  }
   const addExercise = e => {
     e.preventDefault()
+
+    const nameExercise = exerciseUser.nameExercise
+    listExercise.push(nameExercise)
+    const listAux = [...listExercise]
+    setListExercise([...listAux])
+
+    send('ADD', { exercises: exerciseUser })
+    setExerciseUser(defaultExercise)
   }
 
   const goToSummary = () => {
@@ -27,32 +61,58 @@ function Series ({ send }) {
   return (
     <div>
       <form className='block-evenly margin-y' onSubmit={addExercise}>
-        <input type='text' />
+        <input
+          type='text'
+          value={exerciseUser.nameExercise}
+          onChange={handleName}
+          required
+        />
         <div className='container-counter'>
           <div className='counter'>
             <p>Reps</p>
             <div className='counter-button'>
-              <button onClick={repIncrease}>+</button>
-              <p>{repCounter}</p>
-              <button onClick={repDecrease}>-</button>
+              <button type='button' onClick={repIncrease}>
+                +
+              </button>
+              <p>{exerciseUser.repCounter}</p>
+              <button
+                type='button'
+                disabled={exerciseUser.repCounter < 1}
+                onClick={repDecrease}
+              >
+                -
+              </button>
             </div>
           </div>
           <div className='counter'>
             <p>Series</p>
             <div className='counter-button'>
-              <button onClick={seriesIncrease}>+</button>
-              <p>{seriesCounter}</p>
-              <button onClick={seriesDecrease}>-</button>
+              <button type='button' onClick={seriesIncrease}>
+                +
+              </button>
+              <p>{exerciseUser.seriesCounter}</p>
+              <button
+                type='button'
+                disabled={exerciseUser.seriesCounter < 1}
+                onClick={seriesDecrease}
+              >
+                -
+              </button>
             </div>
           </div>
         </div>
-        <button>Add exercise</button>
+        <button type='submit'>Add exercise</button>
       </form>
-      <div className="list-exercise">
-        <ul>
-          <li>Press</li>
-          <li>Push up</li>
-        </ul>
+      <div className='list-exercise'>
+        {listExercise.length > 0 ? (
+          <ul>
+            {listExercise.map((ex, index) => (
+              <li key={index}>{ex}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>There is not exercise to show</p>
+        )}
       </div>
       <button onClick={goToSummary}>Continue</button>
     </div>

@@ -12,7 +12,7 @@ import { Summary } from './Summary'
 function BaseLayout () {
   const [state, send] = useMachine(WorkOutMachine)
 
-  console.log('Nuestra maquina: ', state.value)
+  console.log('Nuestra maquina: ', state.value, state.context)
 
   return (
     <main className='main'>

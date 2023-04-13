@@ -2,7 +2,7 @@ import React from 'react'
 
 function NavLayout ({ state, send }) {
   const onCancel = () => {
-    send('CANCEL')
+    send('CANCEL', {exercises: [], selectedExercise: ''})
   }
   return (
     <nav className='nav'>

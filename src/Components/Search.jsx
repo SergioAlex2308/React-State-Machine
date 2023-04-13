@@ -6,7 +6,7 @@ function Search ({ send }) {
     setExercise(e.target.value)
   }
   const goToSeries = () => {
-    send('CONTINUE')
+    send('CONTINUE', { selectedExercise: exercise})
   }
 
   const options = ['Abs', 'Leg', 'Arms', 'Chest', 'Back']

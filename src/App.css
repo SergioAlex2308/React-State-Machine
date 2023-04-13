@@ -59,3 +59,10 @@
 .list-exercise {
   margin: 0 auto;
 }
+
+.list-exercise ul, .list-exercise p {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-weight: bold;
+}

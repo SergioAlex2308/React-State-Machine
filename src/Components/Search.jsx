@@ -1,15 +1,17 @@
 import React from 'react'
 
-function Search ({ send }) {
+function Search ({ state, send }) {
   const [exercise, setExercise] = React.useState('')
   const handleSelect = e => {
     setExercise(e.target.value)
   }
   const goToSeries = () => {
-    send('CONTINUE', { selectedExercise: exercise})
+    send('CONTINUE', { selectedExercise: exercise })
   }
 
-  const options = ['Abs', 'Leg', 'Arms', 'Chest', 'Back']
+  //const options = state.context.muscle;
+  const options = ['Legs', 'Back', 'Chest'];
+
   return (
     <div>
       <h2>Select a muscle group</h2>

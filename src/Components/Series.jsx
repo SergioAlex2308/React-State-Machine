@@ -60,9 +60,11 @@ function Series ({ send }) {
   }
   return (
     <div>
+      <h3>What exercises will we do today?</h3>
       <form className='block-evenly margin-y' onSubmit={addExercise}>
         <input
           type='text'
+          placeholder='Exercise name...'
           value={exerciseUser.nameExercise}
           onChange={handleName}
           required
@@ -101,7 +103,14 @@ function Series ({ send }) {
             </div>
           </div>
         </div>
-        <button type='submit'>Add exercise</button>
+        <button
+          disabled={
+            exerciseUser.repCounter === 0 || exerciseUser.seriesCounter === 0
+          }
+          type='submit'
+        >
+          Add exercise
+        </button>
       </form>
       <div className='list-exercise'>
         {listExercise.length > 0 ? (
@@ -114,7 +123,13 @@ function Series ({ send }) {
           <p>There is not exercise to show</p>
         )}
       </div>
-      <button onClick={goToSummary}>Continue</button>
+      <button
+        className='continue'
+        disabled={listExercise.length === 0}
+        onClick={goToSummary}
+      >
+        Continue
+      </button>
     </div>
   )
 }

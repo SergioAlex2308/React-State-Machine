@@ -12,8 +12,6 @@ import { Summary } from './Summary'
 function BaseLayout () {
   const [state, send] = useMachine(WorkOutMachine)
 
-  console.log('Nuestra maquina: ', state.context)
-
   return (
     <main className='main'>
       <NavLayout state={state} send={send} />
@@ -23,7 +21,7 @@ function BaseLayout () {
         onWelcome={send => <Welcome send={send} />}
         onSearch={send => <Search state={state} send={send} />}
         onSeries={send => <Series send={send} />}
-        onSummary={send => <Summary send={send} />}
+        onSummary={send => <Summary send={send} context={state.context} />}
       />
     </main>
   )

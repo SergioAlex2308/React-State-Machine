@@ -10,7 +10,9 @@ function Search ({ state, send }) {
   }
 
   //const options = state.context.muscle;
-  const options = ['Legs', 'Back', 'Chest'];
+  //const options = ['Legs', 'Back', 'Chest'];
+  const options = Object.values(state.context.muscles)
+  //console.log(Object.values(options))
 
   return (
     <div>
@@ -20,11 +22,14 @@ function Search ({ state, send }) {
           <option value='' disabled defaultValue>
             Muscle group
           </option>
-          {options.map(op => (
-            <option key={op} value={op}>
-              {op}
-            </option>
-          ))}
+          {options.map(
+            op =>
+              op?.name_en && (
+                <option key={op.id} value={op.name_en}>
+                  {op.name_en}
+                </option>
+              )
+          )}
         </select>
         <button disabled={exercise === ''} onClick={goToSeries}>
           Continue

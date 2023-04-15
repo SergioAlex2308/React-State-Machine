@@ -1,26 +1,23 @@
 import { assign, createMachine } from 'xstate'
-//import { fetchApi } from '../utils/api'
+import { fetchApi } from '../utils/api'
 
-/* const fillMuscle = {
+const fillMuscle = {
   initial: 'loading',
   states: {
     loading: {
       invoke: {
-        id: 'getCountries',
+        id: 'getMuscle',
         src: () => fetchApi,
         onDone: {
           target: 'success',
           actions: assign({
-            muscles: (context, event) => {
-              console.log(event.data)
-			  return event.data
-            }
+            muscles: (context, event) => event.data.results
           })
         },
         onError: {
           target: 'failure',
           actions: assign({
-            error: 'Request fail'
+            error: 'Fallo el request'
           })
         }
       }
@@ -32,7 +29,7 @@ import { assign, createMachine } from 'xstate'
       }
     }
   }
-} */
+}
 
 const workOutMachine = createMachine(
   {
@@ -61,11 +58,14 @@ const workOutMachine = createMachine(
           },
           CANCEL: 'initial'
         },
-        //...fillMuscle
+        ...fillMuscle
       },
       reps: {
         on: {
-          CONTINUE: 'exercise',
+          CONTINUE: {
+            target: 'exercise',
+            cond: 'moreThanOneExercise'
+          },
           CANCEL: {
             target: 'add',
             actions: 'cleanContext'
@@ -78,13 +78,16 @@ const workOutMachine = createMachine(
       },
       exercise: {
         after: {
-          5000: {
+          8000: {
             target: 'initial',
             actions: 'cleanContext'
           }
         },
         on: {
-          FINISH: 'initial'
+          FINISH: {
+            target: 'initial',
+            actions: 'cleanContext'
+          }
         }
       }
     }
@@ -98,6 +101,11 @@ const workOutMachine = createMachine(
       addExercise: assign((context, event) =>
         context.exercises.push(event.exercises)
       )
+    },
+    guards: {
+      moreThanOneExercise: context => {
+        return context.exercises.length > 0
+      }
     }
   }
 )

@@ -1,9 +1,12 @@
 {
+  "homepage":"https://SergioAlex2308.github.io/React-State-Machine",
   "name": "curso-statemachine",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeply": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -21,6 +24,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.38.0",
     "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^5.0.0",
     "vite": "^4.2.0",
     "vite-plugin-eslint": "^1.8.1"
   }
